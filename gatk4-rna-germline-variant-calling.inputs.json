@@ -1,35 +1,34 @@
 {
   "##_COMMENT1": "Input",
-  "RNAseq.inputBam": "gs://gatk-test-data/rna_bam/NA12878_b37/NA12878.unmapped.bam",
+  "RNAseq.inputBam": "/datasettestinputs/dataset/gatk4-rnaseq-germline-snps-indels/NA12878.unmapped.bam",
   
   "##_COMMENT2": "REFERENCE FILES",
-  "RNAseq.refFasta": "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta",
-  "RNAseq.refFastaIndex": "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.fasta.fai",
-  "RNAseq.refDict": "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dict",
+  "RNAseq.refFasta": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.fasta",
+  "RNAseq.refFastaIndex": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.fasta.fai",
+  "RNAseq.refDict": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dict",
 
   "##_COMMENT4": "RESOURCE FILES",
-  "RNAseq.dbSnpVcf": "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dbsnp138.vcf",
-  "RNAseq.dbSnpVcfIndex": "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.dbsnp138.vcf.idx",
+  "RNAseq.dbSnpVcf": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dbsnp138.vcf",
+  "RNAseq.dbSnpVcfIndex": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dbsnp138.vcf.idx",
   "RNAseq.knownVcfs": [
-    "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf",
-    "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.known_indels.vcf"
+    "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf",
+    "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.known_indels.vcf"
   ],
   "RNAseq.knownVcfsIndices": [
-    "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf.idx",
-    "gs://gcp-public-data--broad-references/Homo_sapiens_assembly19_1000genomes_decoy/Homo_sapiens_assembly19_1000genomes_decoy.known_indels.vcf.idx"
+    "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf.idx",
+    "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.known_indels.vcf.idx"
   ],
-  "RNAseq.annotationsGTF": "gs://gatk-test-data/intervals/star.gencode.v19.transcripts.patched_contigs.gtf",
+  "RNAseq.annotationsGTF": "/datasettestinputs/dataset/gatk4-rnaseq-germline-snps-indels/star.gencode.v19.transcripts.patched_contigs.gtf",
   
   "##_COMMENT4": "DOCKERS",
   "#RNAseq.gatk4_docker_override": "String? (optional)",
   "#RNAseq.star_docker_override": "String? (optional)",
-  "#RNAseq.gitc_docker_override": "String? (optional)",
   
   "##_COMMENT5": "PATHS",
-  "#RNAseq.gatk_path_override": "/gatk/gatk",
+  "#RNAseq.gatk_path_override": "String? (optional)",
 
   "##_COMMENT6": "PREEMPTIBLES",
-  "##RNAseq.preemptible_tries": "(optional) Int?",
+  "#RNAseq.preemptible_tries": "(optional) Int?",
   
   "##_COMMENT7": "Misc",
   "#RNAseq.StarAlign.num_threads": "(optional) Int?",
@@ -40,7 +39,6 @@
   "#RNAseq.StarGenerateReferences.num_threads": "(optional) Int?",
   "#RNAseq.StarGenerateReferences.mem_gb": "(optional) Int?",
   "#RNAseq.haplotypeScatterCount": "(optional) Int?",
-  "#RNAseq.use_gatk4_for_all_tools": "(optional) Boolean",
   "#RNAseq.minConfidenceForVariantCalling": "(optional) Int?",
   "#RNAseq.zippedStarReferences": "(optional) File?",
   "#RNAseq.readLength": "(optional) Int?"
