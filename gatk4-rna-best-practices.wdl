@@ -456,7 +456,7 @@ task MergeBamAlignment {
         disk: sub(((size(unaligned_bam,"GB")+size(star_bam,"GB")+1)*5),"\\..*","") + " GB"
         memory: "4 GB"
         preemptible: true
-	maxRetries: preemptible_count
+        maxRetries: preemptible_count
     }
 }
 
@@ -527,7 +527,7 @@ task SplitNCigarReads {
         docker: docker
         memory: "4 GB"
         preemptible: true
-	maxRetries: preemptible_count
+        maxRetries: preemptible_count
     }
 }
 
@@ -573,7 +573,7 @@ task BaseRecalibrator {
         disk: sub((size(input_bam,"GB")*3)+30, "\\..*", "") + " GB"
         docker: docker
         preemptible: true
-	maxRetries: preemptible_count
+        maxRetries: preemptible_count
     }
 }
 
@@ -742,7 +742,7 @@ task MergeVCFs {
         disk: disk_size + " GB"
         docker: docker
         preemptible: true
-	maxRetries: preemptible_count
+        maxRetries: preemptible_count
     }
 }
 
@@ -793,7 +793,7 @@ task ScatterIntervalList {
         memory: "2 GB"
         docker: docker
         preemptible: true
-	maxRetries: preemptible_count
+        maxRetries: preemptible_count
     }
 }
 
@@ -829,7 +829,7 @@ task RevertSam {
         disk: sub(((size(input_bam,"GB")+1)*disk_multiplier),"\\..*","") + " GB"
         memory: "4 GB"
         preemptible: true
-	maxRetries: preemptible_count
+        maxRetries: preemptible_count
     }
 }
 
