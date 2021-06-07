@@ -257,9 +257,9 @@ task gtfToCallingIntervals {
     command <<<
 		set -e
 		
-    	Rscript --no-save -<<'RCODE'
- 			gtf = read.table("${gtf}", sep="\t")
- 			gtf = subset(gtf, V3 == "exon")
+		Rscript --no-save -<<'RCODE'
+			gtf = read.table("${gtf}", sep="\t")
+			gtf = subset(gtf, V3 == "exon")
 			write.table(data.frame(chrom=gtf[,'V1'], start=gtf[,'V4'], end=gtf[,'V5']), "exome.bed", quote = F, sep="\t", col.names = F, row.names = F)
 		RCODE
 
@@ -279,7 +279,7 @@ task gtfToCallingIntervals {
     runtime {
         docker: docker
         preemptible: true
-	maxRetries: preemptible_count
+        maxRetries: preemptible_count
     }
 }
 
@@ -617,7 +617,7 @@ task ApplyBQSR {
         memory: "3500 MB"
         disk: sub((size(input_bam,"GB")*4)+30, "\\..*", "") + " GB"
         preemptible: true
-	maxRetries: preemptible_count
+        maxRetries: preemptible_count
         docker: docker
     }
 }
@@ -814,7 +814,7 @@ task RevertSam {
         	RevertSam \
         	--INPUT ${input_bam} \
         	--OUTPUT ${base_name}.bam \
-            --VALIDATION_STRINGENCY SILENT \
+        	--VALIDATION_STRINGENCY SILENT \
         	--ATTRIBUTE_TO_CLEAR FT \
         	--ATTRIBUTE_TO_CLEAR CO \
         	--SORT_ORDER ${sort_order}
