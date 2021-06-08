@@ -255,22 +255,21 @@ task gtfToCallingIntervals {
     Int preemptible_count
 
     command <<<
+		set -e
+		
+		Rscript --no-save -<<'RCODE'
+			gtf = read.table("${gtf}", sep="\t")
+			gtf = subset(gtf, V3 == "exon")
+			write.table(data.frame(chrom=gtf[,'V1'], start=gtf[,'V4'], end=gtf[,'V5']), "exome.bed", quote = F, sep="\t", col.names = F, row.names = F)
+		RCODE
 
-        set -e
+		awk '{print $1 "\t" ($2 - 1) "\t" $3}' exome.bed > exome.fixed.bed
 
-        Rscript --no-save -<<'RCODE'
-            gtf = read.table("${gtf}", sep="\t")
-            gtf = subset(gtf, V3 == "exon")
-            write.table(data.frame(chrom=gtf[,'V1'], start=gtf[,'V4'], end=gtf[,'V5']), "exome.bed", quote = F, sep="\t", col.names = F, row.names = F)
-        RCODE
-
-        awk '{print $1 "\t" ($2 - 1) "\t" $3}' exome.bed > exome.fixed.bed
-
-        ${gatk_path} \
-            BedToIntervalList \
-            -I exome.fixed.bed \
-            -O ${output_name} \
-            -SD ${ref_dict}
+		${gatk_path} \
+			BedToIntervalList \
+			-I exome.fixed.bed \
+			-O ${output_name} \
+			-SD ${ref_dict}
     >>>
 
     output {
@@ -279,7 +278,8 @@ task gtfToCallingIntervals {
 
     runtime {
         docker: docker
-        preemptible: preemptible_count
+        preemptible: true
+        maxRetries: preemptible_count
     }
 }
 
@@ -310,8 +310,9 @@ task SamToFastq {
 	runtime {
 		docker: docker
 		memory: "4 GB"
-		disks: "local-disk " + sub(((size(unmapped_bam,"GB")+1)*5),"\\..*","") + " HDD"
-		preemptible: preemptible_count
+		disk: sub(((size(unmapped_bam,"GB")+1)*5),"\\..*","") + " GB"
+		preemptible: true
+		maxRetries: preemptible_count
 	}
 }
 
@@ -356,10 +357,11 @@ task StarGenerateReferences {
 
 	runtime {
 		docker: docker
-		disks: "local-disk " + disk_size + " HDD"
+		disk: disk_size + " GB"
 		cpu: threads
 		memory: mem +" GB"
-		preemptible: preemptible_count
+		preemptible: true
+		maxRetries: preemptible_count
 	}
 }
 
@@ -411,10 +413,11 @@ task StarAlign {
 
 	runtime {
 		docker: docker
-		disks: "local-disk " + sub(((size(fastq1,"GB")+size(fastq2,"GB")*10)+30+add_to_disk),"\\..*","") + " HDD"
+		disk: sub(((size(fastq1,"GB")+size(fastq2,"GB")*10)+30+add_to_disk),"\\..*","") + " GB"
 		memory: (star_mem+1) + " GB"
 		cpu: threads
-		preemptible: preemptible_count
+		preemptible: true
+		maxRetries: preemptible_count
 	}
 }
 
@@ -450,9 +453,10 @@ task MergeBamAlignment {
 
     runtime {
         docker: docker
-        disks: "local-disk " + sub(((size(unaligned_bam,"GB")+size(star_bam,"GB")+1)*5),"\\..*","") + " HDD"
+        disk: sub(((size(unaligned_bam,"GB")+size(star_bam,"GB")+1)*5),"\\..*","") + " GB"
         memory: "4 GB"
-        preemptible: preemptible_count
+        preemptible: true
+        maxRetries: preemptible_count
     }
 }
 
@@ -483,10 +487,11 @@ task MarkDuplicates {
  	}
 
 	runtime {
-		disks: "local-disk " + sub(((size(input_bam,"GB")+1)*3),"\\..*","") + " HDD"
+		disk:  sub(((size(input_bam,"GB")+1)*3),"\\..*","") + " GB"
 		docker: docker
 		memory: "4 GB"
-		preemptible: preemptible_count
+		preemptible: true
+		maxRetries: preemptible_count
 	}
 }
 
@@ -518,10 +523,11 @@ task SplitNCigarReads {
         }
 
     runtime {
-        disks: "local-disk " + sub(((size(input_bam,"GB")+1)*5 + size(ref_fasta,"GB")),"\\..*","") + " HDD"
+        disk: sub(((size(input_bam,"GB")+1)*5 + size(ref_fasta,"GB")),"\\..*","") + " GB"
         docker: docker
         memory: "4 GB"
-        preemptible: preemptible_count
+        preemptible: true
+        maxRetries: preemptible_count
     }
 }
 
@@ -564,9 +570,10 @@ task BaseRecalibrator {
 
     runtime {
         memory: "6 GB"
-        disks: "local-disk " + sub((size(input_bam,"GB")*3)+30, "\\..*", "") + " HDD"
+        disk: sub((size(input_bam,"GB")*3)+30, "\\..*", "") + " GB"
         docker: docker
-        preemptible: preemptible_count
+        preemptible: true
+        maxRetries: preemptible_count
     }
 }
 
@@ -608,8 +615,9 @@ task ApplyBQSR {
 
     runtime {
         memory: "3500 MB"
-        disks: "local-disk " + sub((size(input_bam,"GB")*4)+30, "\\..*", "") + " HDD"
-        preemptible: preemptible_count
+        disk: sub((size(input_bam,"GB")*4)+30, "\\..*", "") + " GB"
+        preemptible: true
+        maxRetries: preemptible_count
         docker: docker
     }
 }
@@ -655,8 +663,9 @@ task HaplotypeCaller {
 	runtime {
 		docker: docker
 		memory: "6.5 GB"
-		disks: "local-disk " + sub((size(input_bam,"GB")*2)+30, "\\..*", "") + " HDD"
-		preemptible: preemptible_count
+		disk: sub((size(input_bam,"GB")*2)+30, "\\..*", "") + " GB"
+		preemptible: true
+		maxRetries: preemptible_count
 	}
 }
 
@@ -696,8 +705,9 @@ task VariantFiltration {
 	runtime {
 		docker: docker
 		memory: "3 GB"
-		disks: "local-disk " + sub((size(input_vcf,"GB")*2)+30, "\\..*", "") + " HDD"
-		preemptible: preemptible_count
+		disk: sub((size(input_vcf,"GB")*2)+30, "\\..*", "") + " GB"
+		preemptible: true
+		maxRetries: preemptible_count
 	}
 }
 
@@ -729,9 +739,10 @@ task MergeVCFs {
 
     runtime {
         memory: "3 GB"
-        disks: "local-disk " + disk_size + " HDD"
+        disk: disk_size + " GB"
         docker: docker
-        preemptible: preemptible_count
+        preemptible: true
+        maxRetries: preemptible_count
     }
 }
 
@@ -778,10 +789,11 @@ task ScatterIntervalList {
     }
 
     runtime {
-        disks: "local-disk 1 HDD"
+        disk: "1 GB"
         memory: "2 GB"
         docker: docker
-        preemptible: preemptible_count
+        preemptible: true
+        maxRetries: preemptible_count
     }
 }
 
@@ -795,12 +807,14 @@ task RevertSam {
     String docker
     Int preemptible_count
 
+    Int disk_multiplier = 7
+
     command <<<
         ${gatk_path} \
         	RevertSam \
         	--INPUT ${input_bam} \
         	--OUTPUT ${base_name}.bam \
-            --VALIDATION_STRINGENCY SILENT \
+        	--VALIDATION_STRINGENCY SILENT \
         	--ATTRIBUTE_TO_CLEAR FT \
         	--ATTRIBUTE_TO_CLEAR CO \
         	--SORT_ORDER ${sort_order}
@@ -812,9 +826,10 @@ task RevertSam {
 
     runtime {
         docker: docker
-        disks: "local-disk " + sub(((size(input_bam,"GB")+1)*5),"\\..*","") + " HDD"
+        disk: sub(((size(input_bam,"GB")+1)*disk_multiplier),"\\..*","") + " GB"
         memory: "4 GB"
-        preemptible: preemptible_count
+        preemptible: true
+        maxRetries: preemptible_count
     }
 }
 
