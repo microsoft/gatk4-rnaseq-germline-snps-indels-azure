@@ -553,7 +553,6 @@ task BaseRecalibrator {
 
     command <<<
         ${gatk_path} --java-options "-XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -XX:+PrintFlagsFinal \
-            -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintGCDetails \
             -Xloggc:gc_log.log -Xms4000m" \
             BaseRecalibrator \
             -R ${ref_fasta} \
@@ -596,8 +595,8 @@ task ApplyBQSR {
 
     command <<<
         ${gatk_path} \
-            --java-options "-XX:+PrintFlagsFinal -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps \
-            -XX:+PrintGCDetails -Xloggc:gc_log.log \
+            --java-options "-XX:+PrintFlagsFinal \
+            -Xloggc:gc_log.log \
             -XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -Xms3000m" \
             ApplyBQSR \
             --add-output-sam-program-record \
