@@ -1,5 +1,5 @@
 {
-    "WorkflowUrl":"https://raw.githubusercontent.com/microsoft/gatk4-rnaseq-germline-snps-indels-azure/az1.0.0/gatk4-rna-best-practices.wdl",
+    "WorkflowUrl":"https://raw.githubusercontent.com/microsoft/gatk4-rnaseq-germline-snps-indels-azure/jsaun/gatk4-rna-best-practices.wdl",
     "WorkflowInputsUrl":"https://raw.githubusercontent.com/microsoft/gatk4-rnaseq-germline-snps-indels-azure/az1.0.0/gatk4-rna-germline-variant-calling.inputs.json",
     "WorkflowOptionsUrl":null,
     "WorkflowDependenciesUrl":null
