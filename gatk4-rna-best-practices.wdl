@@ -280,7 +280,7 @@ task gtfToCallingIntervals {
         docker: docker
         preemptible: true
         maxRetries: preemptible_count
-        memory: "~{ceil(size(gtf, 'GB') * 2)} GB"
+        memory: "4 GB"
     }
 }
 
