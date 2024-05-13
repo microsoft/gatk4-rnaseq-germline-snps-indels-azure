@@ -35,7 +35,7 @@
 	String? gatk_path_override
 	String gatk_path = select_first([gatk_path_override, "/gatk/gatk"])
 	String? star_docker_override
-	String star_docker = select_first([star_docker_override, "quay.io/humancellatlas/secondary-analysis-star:v0.2.2-2.5.3a-40ead6e"])
+	String star_docker = select_first([star_docker_override, "quay.io/humancellatlas/secondary-analysis-star:v0.2.2-2.5.3a-1.0.0"])
 
 	Array[File] knownVcfs
 	Array[File] knownVcfsIndices
