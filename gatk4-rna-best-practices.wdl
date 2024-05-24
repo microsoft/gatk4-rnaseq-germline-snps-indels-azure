@@ -597,7 +597,7 @@ task ApplyBQSR {
 
     command <<<
         ${gatk_path} \
-            --java-options "-XX:+PrintFlagsFinal -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps \
+            --java-options "-XX:+PrintFlagsFinal \
             -XX:+PrintGCDetails -Xloggc:gc_log.log \
             -XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -Xms3000m" \
             ApplyBQSR \
