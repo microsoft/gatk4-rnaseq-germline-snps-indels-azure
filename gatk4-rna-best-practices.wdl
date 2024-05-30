@@ -31,7 +31,7 @@
 	File refDict
 
 	String? gatk4_docker_override
-	String gatk4_docker = select_first([gatk4_docker_override, "broadinstitute/gatk:latest"])
+	String gatk4_docker = select_first([gatk4_docker_override, "us.gcr.io/broad-gatk/gatk:4.5.0.0"])
 	String? gatk_path_override
 	String gatk_path = select_first([gatk_path_override, "/gatk/gatk"])
 	String? star_docker_override
@@ -554,7 +554,6 @@ task BaseRecalibrator {
 
     command <<<
         ${gatk_path} --java-options "-XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -XX:+PrintFlagsFinal \
-            -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintGCDetails \
             -Xloggc:gc_log.log -Xms4000m" \
             BaseRecalibrator \
             -R ${ref_fasta} \
@@ -597,8 +596,8 @@ task ApplyBQSR {
 
     command <<<
         ${gatk_path} \
-            --java-options "-XX:+PrintFlagsFinal -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps \
-            -XX:+PrintGCDetails -Xloggc:gc_log.log \
+            --java-options "-XX:+PrintFlagsFinal \
+            -Xloggc:gc_log.log \
             -XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -Xms3000m" \
             ApplyBQSR \
             --add-output-sam-program-record \
