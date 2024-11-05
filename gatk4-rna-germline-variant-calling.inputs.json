@@ -1,24 +1,24 @@
 {
   "##_COMMENT1": "Input",
-  "RNAseq.inputBam": "/datasettestinputs/dataset/gatk4-rnaseq-germline-snps-indels/NA12878.unmapped.bam",
+  "RNAseq.inputBam": "https://datasettestinputs.blob.core.windows.net/dataset/gatk4-rnaseq-germline-snps-indels/NA12878.unmapped.bam",
   
   "##_COMMENT2": "REFERENCE FILES",
-  "RNAseq.refFasta": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.fasta",
-  "RNAseq.refFastaIndex": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.fasta.fai",
-  "RNAseq.refDict": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dict",
+  "RNAseq.refFasta": "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.fasta",
+  "RNAseq.refFastaIndex": "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.fasta.fai",
+  "RNAseq.refDict": "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dict",
 
   "##_COMMENT4": "RESOURCE FILES",
-  "RNAseq.dbSnpVcf": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dbsnp138.vcf",
-  "RNAseq.dbSnpVcfIndex": "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dbsnp138.vcf.idx",
+  "RNAseq.dbSnpVcf": "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dbsnp138.vcf",
+  "RNAseq.dbSnpVcfIndex": "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.dbsnp138.vcf.idx",
   "RNAseq.knownVcfs": [
-    "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf",
-    "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.known_indels.vcf"
+    "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf",
+    "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.known_indels.vcf"
   ],
   "RNAseq.knownVcfsIndices": [
-    "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf.idx",
-    "/datasettestinputs/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.known_indels.vcf.idx"
+    "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Mills_and_1000G_gold_standard.indels.b37.sites.vcf.idx",
+    "https://datasettestinputs.blob.core.windows.net/dataset/references/Homo_sapiens_assembly19_1000genomes_decoy/Hs_assembly19_1000genomes_decoy.known_indels.vcf.idx"
   ],
-  "RNAseq.annotationsGTF": "/datasettestinputs/dataset/gatk4-rnaseq-germline-snps-indels/star.gencode.v19.transcripts.patched_contigs.gtf",
+  "RNAseq.annotationsGTF": "https://datasettestinputs.blob.core.windows.net/dataset/gatk4-rnaseq-germline-snps-indels/star.gencode.v19.transcripts.patched_contigs.gtf",
   
   "##_COMMENT4": "DOCKERS",
   "#RNAseq.gatk4_docker_override": "String? (optional)",
